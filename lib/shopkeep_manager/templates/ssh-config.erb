@@ -1,0 +1,7 @@
+<% @instances.each do |instance| %>Host <%= instance.tags["Name"].gsub(/\s/,"-").gsub(/\(|\)/,"") %>
+
+HostName <%= instance.public_ip_address %>
+User <%= instance.username %>
+
+
+<% end %>

@@ -1,0 +1,10 @@
+tell application "iTerm"
+  tell current terminal
+    set cur_session to current session
+    <% @instances.each do |instance| %>
+      set cmd to "clear;echo 'opening connection to <%= instance.id %>'; ssh <%= @ssh_user || "ubuntu" %>@<%= instance.public_ip_address %>"
+      tell (launch session "Default") to write text cmd
+    <% end %>
+    select cur_session
+  end tell
+end tell

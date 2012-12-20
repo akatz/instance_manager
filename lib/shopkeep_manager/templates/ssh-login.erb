@@ -1,0 +1,5 @@
+touch "<%= tmpprefix %>.open_terminals.$$"
+RONINRC=`<%= @options[:ssh_command] %> 'RC=$(tempfile) && cat - > "$RC" && echo "$RC"' < <%= temprcfile.path %>` &&
+<%= @options[:ssh_command] %> -t "/bin/bash --rcfile ${RC} && rm ${RC}" &&
+<%= @options[:ssh_command] %> -O exit && rm -f "<%= temprcfile.path %>"
+
