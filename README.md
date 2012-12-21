@@ -1,4 +1,4 @@
-[![Build Status](https://next.travis-ci.com/shopkeep/instance-manager.png?token=NPsApLvmCoVeN5UPR45M&branch=master)](https://next.travis-ci.com/shopkeep/instance-manager)
+[![Build Status](https://travis-ci.org/akatz/instance_manager.png?branch=master)](https://travis-ci.org/akatz/instance_manager)
 [![CodeClimate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/akatz/instance_manager)
 
 # ShopkeepManager
