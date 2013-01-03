@@ -1,6 +1,6 @@
-module ShopkeepManager
+module InstanceManager
   class Configuration
-    DEFAULT_PATH = File.expand_path("~/.shopkeep")
+    DEFAULT_PATH = File.expand_path("~/.instance-manager")
     attr_accessor :fog_conf_path, :fog_conf, :manager_conf_path, :manager_conf
     def initialize(options = {})
       @conf = {}

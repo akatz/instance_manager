@@ -1,5 +1,5 @@
 require 'erb'
-module ShopkeepManager
+module InstanceManager
   module Actions
     class Open < Action
 
@@ -28,7 +28,7 @@ module ShopkeepManager
 
       def user_from_options_file_contents
         options_file = @options[:options_file] ||
-          ShopkeepManager::Connection.instance.configuration.manager_conf_path
+          InstanceManager::Connection.instance.configuration.manager_conf_path
         if File.exists?(options_file)
           options_file_contents = YAML.load_file(
             File.expand_path(options_file)

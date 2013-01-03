@@ -1,6 +1,6 @@
 require 'rspec'
 require 'fog'
-require 'shopkeep_manager'
+require 'instance_manager'
 
 $0 = "sk"
 ARGV.clear
@@ -29,24 +29,11 @@ def capture(stream)
 end
 
 
-#Fog::Mock.delay=0
-
-#File.open("/tmp/fog","w") do |file|
-  #file.write(YAML.dump({
-      #shopkeep:{
-        #aws_access_key_id: "test",
-        #aws_secret_access_key: "test"
-      #}
-    #})
-  #)
-#end
-#Fog.credentials_path = "/tmp/fog"
-#Fog.credential = :shopkeep
 RSpec.configure do |config|
   config.before(:each) do
-    ShopkeepManager::Connection.mock!
-    @conn = ShopkeepManager::Connection.instance.compute_connection
-    @rds_conn = ShopkeepManager::Connection.instance.rds_connection
+    InstanceManager::Connection.mock!
+    @conn = InstanceManager::Connection.instance.compute_connection
+    @rds_conn = InstanceManager::Connection.instance.rds_connection
     @staging = @conn.servers.create({
         "tags" => {
                  "Name" => "sk-stage-1",

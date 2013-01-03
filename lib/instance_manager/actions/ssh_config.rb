@@ -1,4 +1,4 @@
-module ShopkeepManager
+module InstanceManager
   module Actions
     class SshConfig < Action
 

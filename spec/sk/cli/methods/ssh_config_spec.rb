@@ -1,8 +1,8 @@
 require 'spec_helper'
-describe ShopkeepManager::CLI do
+describe InstanceManager::CLI do
   context "without filters" do
     describe "#ssh_config" do
-      let(:ssh_config) { ShopkeepManager::CLI.start(["ssh_config"]) }
+      let(:ssh_config) { InstanceManager::CLI.start(["ssh_config"]) }
       it "should generate an ssh config with all the instances" do
         results = capture(:stdout) { ssh_config }
         expected_results = ""

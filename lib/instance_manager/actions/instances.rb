@@ -1,5 +1,5 @@
 require 'fog'
-module ShopkeepManager
+module InstanceManager
   module Actions
     class Instances < Action
 
@@ -15,9 +15,9 @@ module ShopkeepManager
 
       def find_instances
         if @options[:type] == "database"
-          instances = ShopkeepManager::Connection.instance.rds_connection.servers
+          instances = InstanceManager::Connection.instance.rds_connection.servers
         else
-          instances = ShopkeepManager::Connection.instance.compute_connection.servers
+          instances = InstanceManager::Connection.instance.compute_connection.servers
           # find only the running instances
           instances = instances.find_all {|x| x.state == "running" } unless @options[:all_instances]
           # filter for the environment

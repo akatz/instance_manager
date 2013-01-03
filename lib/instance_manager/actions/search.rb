@@ -1,10 +1,10 @@
 require 'fog'
-module ShopkeepManager
+module InstanceManager
   module Actions
     class Search < Action
 
       def run
-        connection = ShopkeepManager::Connection.instance.compute_connection
+        connection = InstanceManager::Connection.instance.compute_connection
         st = prepare_search_hash(connection)
         instances = connection.servers.all(st)
 

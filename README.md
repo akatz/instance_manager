@@ -1,25 +1,24 @@
-[![Build Status](https://next.travis-ci.com/shopkeep/instance-manager.png?token=NPsApLvmCoVeN5UPR45M&branch=master)](https://next.travis-ci.com/shopkeep/instance-manager)
+[![Build Status](https://travis-ci.org/akatz/instance_manager.png?branch=master)](https://travis-ci.org/akatz/instance_manager)
 [![CodeClimate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/akatz/instance_manager)
 
-# ShopkeepManager
+# InstanceManager
 
 This gem is to facilitate easy management of the instances
-running shopkeeps infrastructure on the AWS platform
+running your infrastructure on the AWS platform
 
 ## Installation
 ```
-gem build shopkeep_manager.gemspec
-gem install shopkeep_manager --local
+gem build instance_manager.gemspec
+gem install instance_manager --local
 ```
 ## Usage
 
-This requires amazon api credentials. If you need them please
-contact me (avrohom@shopkeep.com)
+This requires amazon api credentials.
 
-Place them in a file called ~/.shopkeep like this:
+Place them in a file called ~/.instance-manager like this:
 
 ```
-:shopkeep:
+:default:
   :aws_access_key_id: XXXXXXXXXXXXXXXXXXXX
   :aws_secret_access_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```

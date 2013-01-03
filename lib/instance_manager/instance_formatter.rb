@@ -1,6 +1,6 @@
 require 'pry'
 require_relative 'formatter'
-module ShopkeepManager
+module InstanceManager
   class InstanceFormatter < Formatter
     def initialize(instances = nil, options = {labels: true})
       @output = ""

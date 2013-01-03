@@ -1,4 +1,4 @@
-module ShopkeepManager
+module InstanceManager
   module Actions
     class Action
       def self.run(options,args = nil)

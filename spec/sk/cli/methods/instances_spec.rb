@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe ShopkeepManager::CLI do
+describe InstanceManager::CLI do
 
   context "without filters" do
     describe "#instances" do
-      let(:instances) { ShopkeepManager::CLI.start(["instances"]) }
+      let(:instances) { InstanceManager::CLI.start(["instances"]) }
        it "outputs the ids of all running instances under our account" do
           results = capture(:stdout) { instances }
           results.should =~ /#{@production_web_1.id}/
@@ -28,10 +28,10 @@ describe ShopkeepManager::CLI do
     end
   end
   context "with a filter" do
-    let(:all_instances) { ShopkeepManager::CLI.start(["instances", "-a"]) }
-    let(:no_instances) { ShopkeepManager::CLI.start(["instances", "-r", "failcase"]) }
+    let(:all_instances) { InstanceManager::CLI.start(["instances", "-a"]) }
+    let(:no_instances) { InstanceManager::CLI.start(["instances", "-r", "failcase"]) }
     context "for environment" do
-      let(:production_instances) { ShopkeepManager::CLI.start(["instances","-e", "production"]) }
+      let(:production_instances) { InstanceManager::CLI.start(["instances","-e", "production"]) }
       it "should output only instances that are tagged with the production environment" do
            results = capture(:stdout) { production_instances }
            results.should =~ /#{@production_web_1.id}/
@@ -41,7 +41,7 @@ describe ShopkeepManager::CLI do
       end
     end
     context "for type" do
-      let(:database_instances) { ShopkeepManager::CLI.start(["instances","-t", "database"]) }
+      let(:database_instances) { InstanceManager::CLI.start(["instances","-t", "database"]) }
       it "should output only the db instances" do
         results = capture(:stdout) { database_instances }
         results.should =~ /#{@production_rds.id}/
@@ -52,7 +52,7 @@ describe ShopkeepManager::CLI do
 
     end
     context "for role" do
-      let(:backoffice_instances) { ShopkeepManager::CLI.start(["instances","-r", "backoffice"]) }
+      let(:backoffice_instances) { InstanceManager::CLI.start(["instances","-r", "backoffice"]) }
       it "should output only instances that are tagged with the backoffice role" do
            results = capture(:stdout) { backoffice_instances }
            results.should =~ /#{@staging.id}/
@@ -74,8 +74,8 @@ describe ShopkeepManager::CLI do
     end
   end
   context "with multiple filters" do
-    let(:backoffice_instances) { ShopkeepManager::CLI.start(["instances","-r", "backoffice", "-e", "prod"]) }
-    let(:no_instances) { ShopkeepManager::CLI.start(["instances", "-r", "failcase", "-e","w00t"]) }
+    let(:backoffice_instances) { InstanceManager::CLI.start(["instances","-r", "backoffice", "-e", "prod"]) }
+    let(:no_instances) { InstanceManager::CLI.start(["instances", "-r", "failcase", "-e","w00t"]) }
 
     it "should output only instances that match both filters" do
       results = capture(:stdout) { backoffice_instances }
@@ -96,7 +96,7 @@ describe ShopkeepManager::CLI do
 
   end
   context "with uppercase filters" do
-    let(:backoffice_instances) { ShopkeepManager::CLI.start(["instances","-r", "Backoffice", "-e", "Prod"]) }
+    let(:backoffice_instances) { InstanceManager::CLI.start(["instances","-r", "Backoffice", "-e", "Prod"]) }
     it "should output instances that match upper and lowercase" do
       results = capture(:stdout) { backoffice_instances }
       results.should =~ /#{@production_web_1.id}/
@@ -106,7 +106,7 @@ describe ShopkeepManager::CLI do
     end
   end
   context "with an amazon_id" do
-    let(:single_instance) { ShopkeepManager::CLI.start(["instances",@production_web_1.id]) }
+    let(:single_instance) { InstanceManager::CLI.start(["instances",@production_web_1.id]) }
 
     it "should output only that instance" do
       results = capture(:stdout) { single_instance }

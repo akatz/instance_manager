@@ -1,13 +1,13 @@
 require 'spec_helper'
-require 'shopkeep_manager/actions'
+require 'instance_manager/actions'
 
-describe ShopkeepManager::Actions::Open do
+describe InstanceManager::Actions::Open do
   describe "#open" do
     it "should use the user specified in the options file to login" do
       options_file = write_options_file(
         "/tmp/opts", { :instance_manager => {:username => "akatz" } }
       )
-      opener = ShopkeepManager::Actions::Open.new(
+      opener = InstanceManager::Actions::Open.new(
         {:options_file => options_file.path}
       )
       template = opener.applescript
@@ -17,14 +17,14 @@ describe ShopkeepManager::Actions::Open do
       options_file = write_options_file(
         "/tmp/opts", { }
       )
-      opener = ShopkeepManager::Actions::Open.new(
+      opener = InstanceManager::Actions::Open.new(
         {:options_file => options_file.path}
       )
       template = opener.applescript
       template.should =~ /deploy@/
     end
     context "without any options" do
-      subject { ShopkeepManager::Actions::Open.new({}) }
+      subject { InstanceManager::Actions::Open.new({}) }
       it "should render a template that includes all the running instances" do
         template = subject.applescript
         [@production_web_1,@production_worker_1,
@@ -36,7 +36,7 @@ describe ShopkeepManager::Actions::Open do
     end
     context "with a filter" do
 
-      subject { ShopkeepManager::Actions::Open.new({environment: "production"}) }
+      subject { InstanceManager::Actions::Open.new({environment: "production"}) }
       it "should render a template that only includes production instances" do
         template = subject.applescript
         template.should =~ /#{@production_web_1.id}/

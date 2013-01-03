@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ShopkeepManager::CLI do
+describe InstanceManager::CLI do
   context "#search" do
     shared_examples_for "a search" do
       it "should not return any production instances" do
@@ -12,7 +12,7 @@ describe ShopkeepManager::CLI do
     end
 
     describe "with an amazon_id" do
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.id}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.id}"]) }
        it "should return the information for that instance" do
          results = capture(:stdout) { instances }
          results.should =~ /#{@staging.id}/
@@ -21,7 +21,7 @@ describe ShopkeepManager::CLI do
     end
 
     describe "with a public ip address" do
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.public_ip_address}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.public_ip_address}"]) }
       it "should return the information for that instance" do
         results = capture(:stdout) { instances }
         results.should =~ /#{@staging.id}/
@@ -35,7 +35,7 @@ describe ShopkeepManager::CLI do
         @staging.connection.data[:instances][@staging.id]["privateIpAddress"] = "10.1.1.1"
         @staging.reload
       end
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.private_ip_address}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.private_ip_address}"]) }
       it "should return the information for that instance" do
         results = capture(:stdout) { instances }
         results.should =~ /#{@staging.id}/
@@ -44,7 +44,7 @@ describe ShopkeepManager::CLI do
     end
 
     describe "with a private hostname that starts with ip- and has no .ec2.internal suffix" do
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.private_dns_name.gsub(/.ec2.internal/,"")}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.private_dns_name.gsub(/.ec2.internal/,"")}"]) }
 
       it "should return the information for that instance" do
         results = capture(:stdout) {instances}
@@ -63,7 +63,7 @@ describe ShopkeepManager::CLI do
         @staging.connection.data[:instances][@staging.id]["privateDnsName"] = @private_dns_name
         @staging.reload
       end
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.private_dns_name.gsub(/.compute-1.internal/,"")}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.private_dns_name.gsub(/.compute-1.internal/,"")}"]) }
 
       it "should return the information for that instance" do
         results = capture(:stdout) {instances}
@@ -73,7 +73,7 @@ describe ShopkeepManager::CLI do
     end
 
     describe "with a private hostname that starts with ip- and ends in .ec2.internal" do
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.private_dns_name}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.private_dns_name}"]) }
 
       it "should return the information for that instance" do
         results = capture(:stdout) {instances}
@@ -83,7 +83,7 @@ describe ShopkeepManager::CLI do
     end
 
     describe "with a public hostname" do
-      let(:instances) { ShopkeepManager::CLI.start(["search","#{@staging.dns_name}"]) }
+      let(:instances) { InstanceManager::CLI.start(["search","#{@staging.dns_name}"]) }
 
       it "should return the information for that instance" do
         results = capture(:stdout) {instances}

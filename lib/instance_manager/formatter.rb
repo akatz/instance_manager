@@ -1,4 +1,4 @@
-module ShopkeepManager
+module InstanceManager
   class Formatter
     def initialize(thing_to_format)
       @output = ""

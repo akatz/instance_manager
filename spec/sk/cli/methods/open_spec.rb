@@ -1,10 +1,10 @@
 require 'spec_helper'
-describe ShopkeepManager::CLI do
+describe InstanceManager::CLI do
   context "without filters" do
     describe "#instances" do
-      let(:instances) { ShopkeepManager::CLI.start(["open","-e","production"]) }
+      let(:instances) { InstanceManager::CLI.start(["open","-e","production"]) }
       it "should run the applescript" do
-        ShopkeepManager::Actions::Open.any_instance.should_receive(:'`')
+        InstanceManager::Actions::Open.any_instance.should_receive(:'`')
         instances
       end
     end

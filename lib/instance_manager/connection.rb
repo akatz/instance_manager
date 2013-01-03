@@ -2,7 +2,7 @@ require 'singleton'
 require 'fog'
 
 
-module ShopkeepManager
+module InstanceManager
   class Connection
     include Singleton
 
@@ -37,7 +37,6 @@ module ShopkeepManager
     def real_config
       @configuration = Configuration.new
       Fog.credentials_path = @configuration.fog_conf_path
-      Fog.credential = :shopkeep
     end
 
     def create_connections
